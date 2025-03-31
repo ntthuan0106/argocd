@@ -1,0 +1,24 @@
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: ingress-test
+    namespace: test
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: www.thuan-nguyen-opswat.click
+        http:
+          paths:
+            - pathType: Prefix
+              backend:
+                service:
+                  name: app-service
+                  port:
+                    number: 5000
+              path: /
+    # This section is only required if TLS is to be enabled for the Ingress
+    tls:
+      - hosts:
+        - www.thuan-nguyen-opswat.click
+        secretName: ingress-tls
+
